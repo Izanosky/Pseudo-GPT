@@ -48,6 +48,8 @@ public class PraticaFinalMVC {
         
         Model m = new Model(r, l);
         Controller c = new Controller(m, v);
+        
+        c.initApplication();
     }
     
     private static IRepository setIRepository(String arg) {

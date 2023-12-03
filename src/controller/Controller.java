@@ -19,4 +19,12 @@ public class Controller {
         this.v = vi;
         v.setController(this);
     }
+    
+    public void initApplication(){
+        v.showApplicationStart("Inicializando la aplicacion");
+        
+        v.showMainMenu();
+        
+        v.showApplicationEnd("Saliendo de la aplicacion");
+    }
 }
