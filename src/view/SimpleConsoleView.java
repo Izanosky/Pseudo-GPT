@@ -8,6 +8,6 @@ package view;
  *
  * @author Izan Jimènez Chaves
  */
-public class SimpleConsoleView {
+public class SimpleConsoleView extends ApplicationView {
     
 }

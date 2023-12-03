@@ -8,6 +8,6 @@ package view;
  *
  * @author Izan Jimènez Chaves
  */
-public class VoiceConsoleView {
+public class VoiceConsoleView extends ApplicationView {
     
 }

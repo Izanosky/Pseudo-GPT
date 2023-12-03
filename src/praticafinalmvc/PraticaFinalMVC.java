@@ -11,6 +11,13 @@ import view.VoiceConsoleView;
 import controller.Controller;
 
 import model.Model;
+import model.ILLM;
+import model.IRepository;
+import model.CSV_ILLM;
+import model.Fake_ILLM;
+import model.Smart_ILLM;
+import  model.XML_Repository;
+import model.JSON_Repository;
 
 /**
  *
@@ -24,6 +31,57 @@ public class PraticaFinalMVC {
     public static void main(String[] args) {
         // TODO code application logic here
         
+        ApplicationView view;
+        IRepository repository;
+        ILLM l;
+        
+        if(args.length == 3){
+            repository = setIRepository(args[0]);
+            l = setILLM(args[1]);
+            view = setApplicationView(args[2]);
+        }else{
+            // Opciones por defecto:
+            repository = new JSON_Repository();
+            l = new Fake_ILLM();
+            view = new SimpleConsoleView();
+        }
+        
+        
+    }
+    
+    private static IRepository setIRepository(String arg) {
+        switch (arg) {
+            case "xml":
+                return new XML_Repository();
+            case "json":
+                return new JSON_Repository();
+            default:
+                return new JSON_Repository();
+        }
+    }
+    
+    private static ILLM setILLM(String arg) {
+        switch (arg) {
+            case "csv":
+                return new CSV_ILLM();
+            case "fake":
+                return new Fake_ILLM();
+            case "smart":
+                return new Smart_ILLM();
+            default:
+                return new Fake_ILLM();
+        }
+    }
+    
+    private static ApplicationView setApplicationView(String arg) {
+        switch (arg) {
+            case "voz":
+                return new VoiceConsoleView();
+            case "consola":
+                return new SimpleConsoleView();
+            default:
+                return new SimpleConsoleView();
+        }
     }
     
 }
