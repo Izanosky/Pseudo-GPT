@@ -31,22 +31,23 @@ public class PraticaFinalMVC {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        ApplicationView view;
-        IRepository repository;
+        ApplicationView v;
+        IRepository r;
         ILLM l;
         
         if(args.length == 3){
-            repository = setIRepository(args[0]);
+            r = setIRepository(args[0]);
             l = setILLM(args[1]);
-            view = setApplicationView(args[2]);
+            v = setApplicationView(args[2]);
         }else{
             // Opciones por defecto:
-            repository = new JSON_Repository();
+            r = new JSON_Repository();
             l = new Fake_ILLM();
-            view = new SimpleConsoleView();
+            v = new SimpleConsoleView();
         }
         
-        
+        Model m = new Model(r, l);
+        Controller c = new Controller(m, v);
     }
     
     private static IRepository setIRepository(String arg) {

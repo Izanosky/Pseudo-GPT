@@ -9,5 +9,11 @@ package model;
  * @author Izan Jimènez Chaves
  */
 public class Model {
+    IRepository rep;
+    ILLM intel;
     
+    public Model(IRepository r, ILLM i) {
+        this.intel = i;
+        this.rep = r;
+    }
 }
