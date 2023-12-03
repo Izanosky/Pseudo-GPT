@@ -8,6 +8,6 @@ package model;
  *
  * @author Usuario
  */
-public class JSON_Repository {
+public class JSON_Repository implements IRepository {
     
 }

@@ -8,6 +8,6 @@ package model;
  *
  * @author Usuario
  */
-public class CSV_ILLM {
+public class CSV_ILLM implements ILLM {
     
 }

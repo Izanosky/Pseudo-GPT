@@ -8,6 +8,6 @@ package model;
  *
  * @author Usuario
  */
-public class Smart_ILLM {
+public class Smart_ILLM implements ILLM {
     
 }

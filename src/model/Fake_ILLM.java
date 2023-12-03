@@ -8,6 +8,6 @@ package model;
  *
  * @author Usuario
  */
-public class Fake_ILLM {
+public class Fake_ILLM implements ILLM {
     
 }

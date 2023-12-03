@@ -8,6 +8,6 @@ package model;
  *
  * @author Usuario
  */
-public class XML_Repository {
+public class XML_Repository implements IRepository {
     
 }
