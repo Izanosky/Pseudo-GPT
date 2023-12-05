@@ -14,5 +14,23 @@ import java.util.List;
 public class Conversation implements Serializable {
     String llmName;
     List<Message> mensajes;
+
+    public String getLlmName() {
+        return llmName;
+    }
+
+    public void setLlmName(String llmName) {
+        this.llmName = llmName;
+    }
+
+    public List<Message> getMensajes() {
+        return mensajes;
+    }
+
+    public void setMensajes(List<Message> mensajes) {
+        this.mensajes = mensajes;
+    }
+    
+    
     
 }
