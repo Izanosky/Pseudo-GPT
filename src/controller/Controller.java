@@ -21,10 +21,21 @@ public class Controller {
     }
     
     public void initApplication(){
-        v.showApplicationStart("Inicializando la aplicacion");
-        
+        if (m.cargarEstado()) {
+            v.showApplicationStart("Inicializando la aplicacion (Estado anterior cargado exitosasmente)");
+        }
+        else {
+            v.showApplicationStart("Inicializando la aplicacion (No se pudo cargar el estado anterior)");
+        }
+         
         v.showMainMenu();
         
-        v.showApplicationEnd("Saliendo de la aplicacion");
+        if (m.guardarEstadoAplicación()) {
+            v.showApplicationEnd("Saliendo de la aplicacion (Estado guardado correctamente)");
+        } 
+        else {
+            v.showApplicationEnd("Saliendo de la aplicacion (No se pudo guardar el estado)");
+        }
+        
     }
 }

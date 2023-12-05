@@ -9,5 +9,7 @@ package model;
  * @author Izan Jimènez Chaves
  */
 public class Message {
-    
+    String sender;
+    Long epochSeconds;
+    String content;
 }

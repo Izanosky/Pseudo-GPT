@@ -10,7 +10,7 @@ import controller.Controller;
  * @author Izan Jimènez Chaves
  */
 public abstract class ApplicationView {
-    Controller c;
+    protected Controller c;
     
     public void setController(Controller con){
         this.c = con;

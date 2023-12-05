@@ -9,5 +9,13 @@ package model;
  * @author Usuario
  */
 public class CSV_ILLM implements ILLM {
+
+    @Override
+    public String speak(String string) {
+    }
+
+    @Override
+    public String getIdentifier() {
+    }
     
 }

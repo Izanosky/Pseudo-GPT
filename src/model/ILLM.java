@@ -9,5 +9,6 @@ package model;
  * @author Izan Jimènez Chaves
  */
 public interface ILLM {
-    
+    public String speak(String string);
+    public String getIdentifier();
 }

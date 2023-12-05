@@ -4,10 +4,13 @@
  */
 package model;
 
+import java.util.List;
+
 /**
  *
  * @author Izan Jimènez Chaves
  */
 public interface IRepository {
-    
+    public List<Conversation> importConversation();
+    public void exportConversation (List<Conversation> conversation);
 }

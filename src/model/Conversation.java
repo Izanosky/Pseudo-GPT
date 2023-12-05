@@ -4,10 +4,15 @@
  */
 package model;
 
+import java.io.Serializable;
+import java.util.List;
+
 /**
  *
  * @author Izan Jimènez Chaves
  */
-public class Conversation {
+public class Conversation implements Serializable {
+    String llmName;
+    List<Message> mensajes;
     
 }
