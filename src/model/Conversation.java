@@ -5,7 +5,7 @@
 package model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,7 +13,12 @@ import java.util.List;
  */
 public class Conversation implements Serializable {
     String llmName;
-    List<Message> mensajes;
+    ArrayList<Message> mensajes;
+
+    public Conversation(String llmName, ArrayList<Message> mensajes) {
+        this.llmName = llmName;
+        this.mensajes = mensajes;
+    }
 
     public String getLlmName() {
         return llmName;
@@ -23,14 +28,16 @@ public class Conversation implements Serializable {
         this.llmName = llmName;
     }
 
-    public List<Message> getMensajes() {
+    public ArrayList<Message> getMensajes() {
         return mensajes;
     }
 
-    public void setMensajes(List<Message> mensajes) {
+    public void setMensajes(ArrayList<Message> mensajes) {
         this.mensajes = mensajes;
     }
     
-    
+    public void newMessage(Message message) {
+        mensajes.add(message);
+    }
     
 }

@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controller;
+import java.util.ArrayList;
+import model.Message;
 import view.ApplicationView;
 import model.Model;
 
@@ -37,5 +39,21 @@ public class Controller {
             v.showApplicationEnd("Saliendo de la aplicacion (No se pudo guardar el estado)");
         }
         
+    }
+    
+    public String getResponse(String t) {
+        return m.getResponse(t);
+    }
+    
+    public void setConversation(ArrayList<Message> mensajes) {
+        m.setConversation(mensajes);
+    }
+    
+    public boolean importConversations() {
+        return m.importConversations();
+    }
+    
+    public boolean exportConversations() {
+        return m.exportConversations();
     }
 }

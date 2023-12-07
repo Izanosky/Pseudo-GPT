@@ -4,6 +4,8 @@
  */
 package view;
 import static com.coti.tools.Esdia.*;
+import java.util.ArrayList;
+import model.Message;
 /**
  *
  * @author Izan Jimènez Chaves
@@ -100,11 +102,31 @@ public class SimpleConsoleView extends ApplicationView {
                 default:
                     System.out.println("Opción no válida.");
             }
-        } while (opcion != 6);
+        } while (opcion != 3);
     }
     
     public void newConversation () {
-        
+        ArrayList<Message> mensajes = new ArrayList<>();
+        String temp;
+        String response;
+        System.out.println("-------------- NUEVA CONVERSACION --------------");
+        while (true) {
+            temp = readString_ne("Introduzca un mensaje: ");
+            
+            if (temp.equals("/salir")) {
+                break;
+            }
+            else {
+                mensajes.add(new Message(temp));
+            }
+            
+            response  = c.getResponse(temp);
+            mensajes.add(new Message(response));
+            System.out.println("Rspuestas: " + response);
+            
+        }
+        c.setConversation(mensajes);
+        System.out.println("Conversacion finalizada");
     }
     
     public void listarConversaciones () {
@@ -116,11 +138,21 @@ public class SimpleConsoleView extends ApplicationView {
     }
     
     public void importarConversaciones () {
-        
+        if(c.importConversations()){
+            System.out.println("Conversaciones importadas con exito");
+        }
+        else{
+            System.out.println("No se pudo importar las conversaciones");
+        }
     }
     
     public void exportarConversaciones () {
-        
+        if(c.exportConversations()){
+            System.out.println("Conversaciones exportadas con exito");
+        }
+        else{
+            System.out.println("No se pudo exportar las conversaciones");
+        }
     }
     
 }

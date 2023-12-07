@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -20,29 +20,36 @@ import java.util.List;
  */
 public class JSON_Repository implements IRepository {
     Path ruta = Paths.get(System.getProperty("user.home"), "Desktop", "jLLM", "input.json");
+    boolean status;
     
     @Override
-    public List<Conversation> importConversation() {
+    public ArrayList<Conversation> importConversation() {
         Gson gson = new Gson();
         try{
             String json = new String(Files.readAllBytes(ruta), StandardCharsets.UTF_8);
-            Type tipoDeLista = new TypeToken<List<Conversation>>() {}.getType();
+            Type tipoDeLista = new TypeToken<ArrayList<Conversation>>() {}.getType();
             return gson.fromJson(json, tipoDeLista);
         }catch(IOException e) {
-            System.out.println("ERROR: " + e.getMessage());
             return null;
         }
     }
 
     @Override
-    public void exportConversation(List<Conversation> conversation) {
+    public void exportConversation(ArrayList<Conversation> conversation) {
         try {
             Gson gson = new Gson();
             String json = gson.toJson(conversation);
             Files.write(ruta, json.getBytes(StandardCharsets.UTF_8));
+            status = true;
         } catch (IOException e) {
-            System.err.println("Error:" + e.getMessage());
+            status = false;
         }
     }
+
+    @Override
+    public boolean getStatus() {
+        return status;
+    }
+
     
 }

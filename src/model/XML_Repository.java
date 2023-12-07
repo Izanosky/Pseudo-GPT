@@ -11,38 +11,46 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
  * @author Usuario
  */
 public class XML_Repository implements IRepository {
-    Path ruta = Paths.get(System.getProperty("user.home"), "Desktop", "jLLM", "input.json");
+    Path ruta = Paths.get(System.getProperty("user.home"), "Desktop", "jLLM", "input.xml");
+    boolean status;
     
     @Override
-    public List<Conversation> importConversation() {
+    public ArrayList<Conversation> importConversation() {
         try {
             XmlMapper xmlMapper = new XmlMapper();
             String xml = new String(Files.readAllBytes(ruta), StandardCharsets.UTF_8);
-            return xmlMapper.readValue(xml, xmlMapper.getTypeFactory().constructCollectionType(List.class, Conversation.class));
+            return xmlMapper.readValue(xml, xmlMapper.getTypeFactory().constructCollectionType(ArrayList.class, Conversation.class));
         } catch (IOException e) {
-            System.err.println("Error:" + e.getMessage());
             return null;
         }
     }
 
     @Override
-    public void exportConversation(List<Conversation> conversation) {
+    public void exportConversation(ArrayList<Conversation> conversation) {
         try {
             XmlMapper xmlMapper = new XmlMapper();
             String xml = xmlMapper.writeValueAsString(conversation);
             Files.write(ruta, xml.getBytes(StandardCharsets.UTF_8));
+            status = true;
         } catch (JsonProcessingException e) {
-            System.err.println("Error:" + e.getMessage());
+            status = false;
         } catch (IOException e) {
-            System.err.println("Error:" + e.getMessage());
+            status = false;
         }
     }
+
+    @Override
+    public boolean getStatus() {
+        return status;
+    }
+
+    
     
 }
