@@ -26,8 +26,31 @@ public class Model {
     public Model(IRepository r, ILLM i) {
         this.intel = i;
         this.rep = r;
-        ficheroSerializado = Paths.get(System.getProperty("user.home"), "Desktop", "conversations.bin").toFile();
+        ficheroSerializado = Paths.get(System.getProperty("user.home"), "Desktop","jLLM", "jLLM.bin").toFile();
         conversaciones = new ArrayList<>();
+    }
+    
+    public void setConversation(ArrayList<Message> mensajes){
+        conversaciones.add(new Conversation(intel.getIdentifier(), mensajes));
+    }
+    
+    public String getResponse(String t) {
+        return intel.speak(t);
+    }
+    
+    public boolean importConversations() {
+        conversaciones = rep.importConversation();
+        if (conversaciones != null) {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    public boolean exportConversations() {
+        rep.exportConversation(conversaciones);
+        return rep.getStatus();
     }
     
     public boolean cargarEstado() {

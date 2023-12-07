@@ -4,14 +4,20 @@
  */
 package model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Izan Jimènez Chaves
  */
-public class Message {
+public class Message implements Serializable {
     String sender;
     Long epochSeconds;
     String content;
+
+    public Message(String content) {
+        this.content = content;
+    }
 
     public String getSender() {
         return sender;
@@ -36,6 +42,5 @@ public class Message {
     public void setContent(String content) {
         this.content = content;
     }
-    
     
 }

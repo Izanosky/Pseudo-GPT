@@ -4,17 +4,15 @@
  */
 package model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  *
  * @author Usuario
  */
 public class Fake_ILLM implements ILLM {
-    
-    List<String> mensajes = Arrays.asList(
-        "Más vale tarde que nunca\n" ,
+    ArrayList<String> respuestas = new ArrayList<String>( Arrays.asList("Más vale tarde que nunca\n" ,
         "No por mucho madrugar amanece más temprano\n" ,
         "A caballo regalado no se le mira el diente\n" ,
         "El que mucho abarca poco aprieta\n" ,
@@ -98,15 +96,19 @@ public class Fake_ILLM implements ILLM {
         "Hasta luego, que te vaya bien.\n" ,
         "Mas vale tarde que nunca.\n" ,
         "No estoy dispuesto a aceptar.\n" ,
-        "¿Que piensas sobre esto?\n" 
-    );
+        "¿Que piensas sobre esto?\n") );
+    
+    String identifier = "FakeILLM";
     
     @Override
     public String speak(String string) {
+        int posicion  = (int) (Math.random() * respuestas.size());
+        return respuestas.get(posicion);
     }
 
     @Override
     public String getIdentifier() {
+        return identifier;
     }
     
 }
