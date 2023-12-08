@@ -4,14 +4,20 @@
  */
 package view;
 import static com.coti.tools.Esdia.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import model.Conversation;
 import model.Message;
 /**
  *
  * @author Izan Jimènez Chaves
  */
 public class SimpleConsoleView extends ApplicationView {
-
+    
+    LocalDateTime dateTime = LocalDateTime.now();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy : HH:mm:ss");
+    
     @Override
     public void showApplicationStart(String welcomeMsg) {
         System.out.printf(welcomeMsg + "\n");
@@ -106,35 +112,90 @@ public class SimpleConsoleView extends ApplicationView {
     }
     
     public void newConversation () {
-        ArrayList<Message> mensajes = new ArrayList<>();
+        String start = dateTime.format(formatter);
+        ArrayList<Message> msg = new ArrayList<>();
         String temp;
         String response;
         System.out.println("-------------- NUEVA CONVERSACION --------------");
         while (true) {
-            temp = readString_ne("Introduzca un mensaje: ");
+            System.out.printf("Yo [" + dateTime.format(formatter) + "]");
+            temp = readString_ne(": ");
+            System.out.println("");
             
             if (temp.equals("/salir")) {
                 break;
             }
             else {
-                mensajes.add(new Message(temp));
+                msg.add(new Message("Usuario", temp, dateTime.format(formatter)));
             }
             
             response  = c.getResponse(temp);
-            mensajes.add(new Message(response));
-            System.out.println("Rspuestas: " + response);
+            msg.add(new Message("Agent", response, dateTime.format(formatter)));
+            System.out.printf("Agent [" + dateTime.format(formatter) + "]: " + response + "\n");
             
         }
-        c.setConversation(mensajes);
-        System.out.println("Conversacion finalizada");
+        String end = dateTime.format(formatter);
+        c.setConversation(msg, start, end);
+        System.out.println("Conversacion finalizada. Volviendo al Menu Principal");
     }
     
     public void listarConversaciones () {
+        ArrayList<Conversation> conversaciones = c.getConversation();
+        int indice = 1;
+        int opcion;
+        System.out.println(Conversation.getHeader());
+        for (Conversation conver : conversaciones) {
+            System.out.printf("%10d" + conver.getTable() + "\n", indice++);
+        }
         
+        do {
+            System.out.println("");
+            System.out.println("1. Ver conversacion completa");
+            System.out.println("2. Volver");
+            opcion = readInt("Ingrese una opción: ");
+
+            switch (opcion) {
+                case 1:
+                    int selected;
+                    
+                    do{
+                        selected = readInt("Indique el indice de la conversacion que desea leer: ");
+                        if(selected < 0 || selected > c.getConversationSize()){
+                            System.out.println("----- INDICE NO VALIDO -----");
+                        }
+                    }while(selected < 0 || selected > c.getConversationSize());
+                    
+                    Conversation conver = conversaciones.get(selected-1);
+                    System.out.println("Conversacion del dia: " + conver.getFechaInicio());
+                    for (Message m : conver.getMensajes()) {
+                        System.out.println(String.format("%10s [%s]: %s", m.getSender(), m.getEpochSeconds(), m.getContent()));
+                    }
+                    break;
+                case 2:
+                    System.out.println("Volviendo...");
+                    break;
+                default:
+                    System.out.println("Opción no válida.");
+            }
+        } while (opcion != 2);
     }
     
     public void eliminarConversaciones () {
+        int selected;
+                    
+        do{
+            selected = readInt("Indique el indice de la conversacion que desea eliminar: ");
+            if(selected < 0 || selected > c.getConversationSize()){
+                System.out.println("----- INDICE NO VALIDO -----");
+            }
+        }while(selected < 0 || selected > c.getConversationSize());
         
+        if(c.eliminarConversacion(selected)) {
+            System.out.println("Conversacion eliminada con exito");
+        }
+        else{
+            System.out.println("No se pudo eliminar la conversacion");
+        }
     }
     
     public void importarConversaciones () {

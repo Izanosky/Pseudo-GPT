@@ -30,12 +30,35 @@ public class Model {
         conversaciones = new ArrayList<>();
     }
     
-    public void setConversation(ArrayList<Message> mensajes){
-        conversaciones.add(new Conversation(intel.getIdentifier(), mensajes));
+    public int getConversationsSize() {
+        return conversaciones.size();
+    }
+    
+    public void setConversation(ArrayList<Message> msg, String start, String end){ 
+        conversaciones.add(new Conversation(intel.getIdentifier(), msg, start, end));
+    }
+    
+    public ArrayList<Conversation> getConversation() {
+        ArrayList <Conversation> copy = new ArrayList<>(conversaciones.size());
+        
+        for (Conversation c : conversaciones) {
+            copy.add(c);
+        }     
+        return copy;
     }
     
     public String getResponse(String t) {
         return intel.speak(t);
+    }
+    
+    public boolean eliminarConversacion(int indice) {
+        try{
+            conversaciones.remove(indice);
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
     }
     
     public boolean importConversations() {
@@ -60,7 +83,6 @@ public class Model {
                 ois = new ObjectInputStream(new FileInputStream(ficheroSerializado));
                 this.conversaciones = (ArrayList<Conversation>) ois.readObject();
             } catch (IOException | ClassNotFoundException ex) {
-                // Dejamos el error para la depuración, por el canal err.
                 System.err.println("Error durante la deserialización: " + ex.getMessage());
                 return false;
             } finally {
@@ -68,7 +90,6 @@ public class Model {
                     try {
                         ois.close();
                     } catch (IOException ex) {
-                        // Dejamos el error para la depuración, por el canal err.
                         System.err.println("Error durante la deserialización: " + ex.getMessage());
                         return false;
                     }
@@ -88,7 +109,6 @@ public class Model {
             oos.writeObject(conversaciones);
             return true;
         } catch (IOException ex) {
-            // Dejamos el error para la depuración, por el canal err.
             System.err.println("Error durante la serialización: " + ex.getMessage());
             return false;
         } finally {
@@ -96,7 +116,6 @@ public class Model {
                 try {
                     oos.close();
                 } catch (IOException ex) {
-                    // Dejamos el error para la depuración, por el canal err.
                     System.err.println("Error al cerrar el flujo: " + ex.getMessage());
                     return false;
                 }

@@ -12,11 +12,13 @@ import java.io.Serializable;
  */
 public class Message implements Serializable {
     String sender;
-    Long epochSeconds;
+    String epochSeconds;
     String content;
 
-    public Message(String content) {
+    public Message(String sender, String content, String date) {
+        this.sender = sender;
         this.content = content;
+        this.epochSeconds = date;
     }
 
     public String getSender() {
@@ -27,11 +29,11 @@ public class Message implements Serializable {
         this.sender = sender;
     }
 
-    public Long getEpochSeconds() {
+    public String getEpochSeconds() {
         return epochSeconds;
     }
 
-    public void setEpochSeconds(Long epochSeconds) {
+    public void setEpochSeconds(String epochSeconds) {
         this.epochSeconds = epochSeconds;
     }
 
