@@ -67,7 +67,7 @@ public class SimpleConsoleView extends ApplicationView {
             System.out.println("1. Listar Conversaciones");
             System.out.println("2. Eliminar Conversacion");
             System.out.println("3. Salir");
-            opcion = readInt("Ingrese una opción: ");
+            opcion = readInt("Ingrese una opcion: ");
 
             switch (opcion) {
                 case 1:
@@ -80,7 +80,7 @@ public class SimpleConsoleView extends ApplicationView {
                     System.out.println("Volviendo...");
                     break;
                 default:
-                    System.out.println("Opción no válida.");
+                    System.out.println("Opcion no valida.");
             }
         } while (opcion != 3);
     }
@@ -93,7 +93,7 @@ public class SimpleConsoleView extends ApplicationView {
             System.out.println("1. Importar Conversaciones");
             System.out.println("2. Exportar Conversacion");
             System.out.println("3. Salir");
-            opcion = readInt("Ingrese una opción: ");
+            opcion = readInt("Ingrese una opcion: ");
 
             switch (opcion) {
                 case 1:
@@ -106,7 +106,7 @@ public class SimpleConsoleView extends ApplicationView {
                     System.out.println("Volviendo...");
                     break;
                 default:
-                    System.out.println("Opción no válida.");
+                    System.out.println("Opcion no valida.");
             }
         } while (opcion != 3);
     }
@@ -132,6 +132,7 @@ public class SimpleConsoleView extends ApplicationView {
             response  = c.getResponse(temp);
             msg.add(new Message("Agent", response, dateTime.format(formatter)));
             System.out.printf("Agent [" + dateTime.format(formatter) + "]: " + response + "\n");
+            System.out.println("");
             
         }
         String end = dateTime.format(formatter);
@@ -152,7 +153,7 @@ public class SimpleConsoleView extends ApplicationView {
             System.out.println("");
             System.out.println("1. Ver conversacion completa");
             System.out.println("2. Volver");
-            opcion = readInt("Ingrese una opción: ");
+            opcion = readInt("Ingrese una opcion: ");
 
             switch (opcion) {
                 case 1:
@@ -175,7 +176,7 @@ public class SimpleConsoleView extends ApplicationView {
                     System.out.println("Volviendo...");
                     break;
                 default:
-                    System.out.println("Opción no válida.");
+                    System.out.println("Opcion no valida.");
             }
         } while (opcion != 2);
     }
@@ -190,12 +191,16 @@ public class SimpleConsoleView extends ApplicationView {
             }
         }while(selected < 0 || selected > c.getConversationSize());
         
-        if(c.eliminarConversacion(selected)) {
-            System.out.println("Conversacion eliminada con exito");
+        c.eliminarConversacion(selected);
+        
+        ArrayList<Conversation> conversaciones = c.getConversation();
+        int indice = 1;
+        System.out.println("\nConversaciones actualizadas");
+        System.out.println(Conversation.getHeader());
+        for (Conversation conver : conversaciones) {
+            System.out.printf("%10d" + conver.getTable() + "\n", indice++);
         }
-        else{
-            System.out.println("No se pudo eliminar la conversacion");
-        }
+        
     }
     
     public void importarConversaciones () {

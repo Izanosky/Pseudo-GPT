@@ -51,14 +51,8 @@ public class Model {
         return intel.speak(t);
     }
     
-    public boolean eliminarConversacion(int indice) {
-        try{
+    public void eliminarConversacion(int indice) {
             conversaciones.remove(indice);
-            return true;
-        }
-        catch(Exception e){
-            return false;
-        }
     }
     
     public boolean importConversations() {

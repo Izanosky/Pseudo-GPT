@@ -66,7 +66,7 @@ public class Controller {
         return m.exportConversations();
     }
     
-    public boolean eliminarConversacion(int indice) {
-        return m.eliminarConversacion(indice);
+    public void eliminarConversacion(int indice) {
+         m.eliminarConversacion(indice);
     }
 }
