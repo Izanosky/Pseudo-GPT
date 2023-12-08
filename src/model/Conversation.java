@@ -16,12 +16,16 @@ public class Conversation implements Serializable {
     ArrayList<Message> mensajes;
     String fechaInicio;
     String fechaFin;
+    long fchInicio;
+    long fchFin;
 
-    public Conversation(String llmName, ArrayList<Message> mensajes, String init, String end) {
+    public Conversation(String llmName, ArrayList<Message> mensajes, String init, String end, long ini, long fn) {
         this.llmName = llmName;
         this.mensajes = mensajes;
         this.fechaInicio = init;
         this.fechaFin = end;
+        this.fchFin = fn;
+        this.fchInicio = ini;
     }
     
     public Conversation(Conversation c) {
@@ -29,6 +33,22 @@ public class Conversation implements Serializable {
         this.mensajes = c.mensajes;
         this.fechaInicio = c.fechaInicio;
         this.fechaFin = c.fechaFin;
+    }
+
+    public long getFchInicio() {
+        return fchInicio;
+    }
+
+    public void setFchInicio(long fchInicio) {
+        this.fchInicio = fchInicio;
+    }
+
+    public long getFchFin() {
+        return fchFin;
+    }
+
+    public void setFchFin(long fchFin) {
+        this.fchFin = fchFin;
     }
 
     public String getLlmName() {

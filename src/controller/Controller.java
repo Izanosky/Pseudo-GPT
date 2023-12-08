@@ -54,8 +54,16 @@ public class Controller {
         return m.getConversation();
     }
     
-    public void setConversation(ArrayList<Message> msg, String start, String end) {
-        m.setConversation(msg, start, end);       
+    public void newMessages(){
+        m.newMessages();
+    }
+    
+    public void addMessage(Message msg) {
+        m.addMessage(msg);
+    }
+    
+    public void setConversation(String start, String end, long strt, long End) {
+        m.setConversation(start, end, strt, End);       
     }
     
     public boolean importConversations() {

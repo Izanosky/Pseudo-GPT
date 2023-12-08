@@ -22,6 +22,7 @@ public class Model {
     ILLM intel;
     File ficheroSerializado;
     ArrayList<Conversation> conversaciones;
+    ArrayList<Message> mensajes;
     
     public Model(IRepository r, ILLM i) {
         this.intel = i;
@@ -34,8 +35,16 @@ public class Model {
         return conversaciones.size();
     }
     
-    public void setConversation(ArrayList<Message> msg, String start, String end){ 
-        conversaciones.add(new Conversation(intel.getIdentifier(), msg, start, end));
+    public void newMessages() {
+        mensajes = new ArrayList<>();
+    }
+    
+    public void addMessage(Message msg) {
+        mensajes.add(msg);
+    }
+    
+    public void setConversation(String start, String end, long strt, long End){ 
+        conversaciones.add(new Conversation(intel.getIdentifier(), mensajes, start, end, strt, End));
     }
     
     public ArrayList<Conversation> getConversation() {
