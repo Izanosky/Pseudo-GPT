@@ -12,7 +12,10 @@ import java.util.Arrays;
  * @author Usuario
  */
 public class Fake_ILLM implements ILLM {
-    ArrayList<String> respuestas = new ArrayList<String>( Arrays.asList("Más vale tarde que nunca\n" ,
+    ArrayList<String> respuestas = new ArrayList<String>( Arrays.asList(
+        //"Adios",   
+        //"Hola",
+        "Más vale tarde que nunca\n" ,
         "No por mucho madrugar amanece más temprano\n" ,
         "A caballo regalado no se le mira el diente\n" ,
         "El que mucho abarca poco aprieta\n" ,
@@ -102,7 +105,22 @@ public class Fake_ILLM implements ILLM {
     
     @Override
     public String speak(String string) {
-        int posicion  = (int) (Math.random() * respuestas.size());
+        int posicion;
+        if(string.contains("Buenas") && !respuestas.isEmpty() || string.contains("Hola") && !respuestas.isEmpty() || string.contains("Buenos") && !respuestas.isEmpty()){
+            for (String resp: respuestas) {
+                if(resp.contains("Buenas") || resp.contains("Hola") || resp.contains("Buenos")) {
+                    return resp;
+                }
+            }
+        }
+        else if(string.contains("Adios") && !respuestas.isEmpty() || string.contains("Chao") && !respuestas.isEmpty()){
+            for (String resp: respuestas) {
+                if(resp.contains("Adios") || resp.contains("Hasta")) {
+                    return resp;
+                }
+            }
+        }
+        posicion  = (int) (Math.random() * respuestas.size());
         return respuestas.get(posicion);
     }
 

@@ -144,9 +144,9 @@ public class SimpleConsoleView extends ApplicationView {
     public void listarConversaciones () {
         ArrayList<Conversation> conversaciones = c.getConversation();
         int indice = 1;
-        int opcion;
-        System.out.println(Conversation.getHeader());
+        int opcion;       
         if(!conversaciones.isEmpty()) {
+            System.out.println(Conversation.getHeader());
             for (Conversation conver : conversaciones) {
                 System.out.printf("%10d" + conver.getTable() + "\n", indice++);
             }
@@ -197,14 +197,16 @@ public class SimpleConsoleView extends ApplicationView {
             }while(selected < 0 || selected > c.getConversationSize());
         
             c.eliminarConversacion(selected-1);
-            conversaciones.remove(selected-1);
+            conversaciones = c.getConversation();
             int indice = 1;
             System.out.println("\nConversaciones actualizadas: ");
-            System.out.println(Conversation.getHeader());
-            for (Conversation conver : conversaciones) {
-                System.out.printf("%10d" + conver.getTable() + "\n", indice++);
-            }
-            if(conversaciones.isEmpty()) {
+            if (!conversaciones.isEmpty()) {
+                System.out.println(Conversation.getHeader());
+                for (Conversation conver : conversaciones) {
+                    System.out.printf("%10d" + conver.getTable() + "\n", indice++);
+                }
+            }            
+            else{
                 System.out.println("------- NO HAY CONVERSACIONES DISPONIBLES -------");
             }
         }

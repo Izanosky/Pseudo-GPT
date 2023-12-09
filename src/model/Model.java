@@ -70,13 +70,17 @@ public class Model {
             return true;
         }
         else{
+            conversaciones = new ArrayList<>();
             return false;
         }
     }
     
     public boolean exportConversations() {
-        rep.exportConversation(conversaciones);
-        return rep.getStatus();
+        if (!conversaciones.isEmpty()) {
+            rep.exportConversation(conversaciones);
+            return rep.getStatus();
+        }
+        return false;
     }
     
     public boolean cargarEstado() {

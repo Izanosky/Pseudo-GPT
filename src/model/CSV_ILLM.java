@@ -54,7 +54,7 @@ public class CSV_ILLM implements ILLM {
     @Override
     public String speak(String string) {
         int posicion;
-        if(string.contains("Buenas") && !saludos.isEmpty() || string.contains("Hola") && !saludos.isEmpty()){
+        if(string.contains("Buenas") && !saludos.isEmpty() || string.contains("Hola") && !saludos.isEmpty() || string.contains("Buenos") && !saludos.isEmpty()){
             posicion  = (int) (Math.random() * saludos.size());
             Text t = saludos.get(posicion);
             return t.getContent();
