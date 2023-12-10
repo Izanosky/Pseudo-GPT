@@ -25,7 +25,7 @@ public class Controller {
     
     public void initApplication(){
         if (m.cargarEstado()) {
-            v.showApplicationStart("Inicializando la aplicacion (Estado anterior cargado: " + m.getConversationsSize() + " conversaciones cargadas");
+            v.showApplicationStart("Inicializando la aplicacion (Estado anterior cargado: " + m.getConversationsSize() + " conversaciones cargadas)");
         }
         else {
             v.showApplicationStart("Inicializando la aplicacion (No se pudo cargar el estado anterior)");

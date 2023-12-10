@@ -55,10 +55,10 @@ public class VoiceConsoleView extends ApplicationView {
             try{
                 String str = 
                              "Menu principal." +
-                             "1. Nueva Conversacion" +
-                             "2. Menu Conversaciones" +
-                             "3. Menu exportacion" +
-                             "4. Salir" +
+                             "1 Nueva Conversacion." +
+                             "2 Menu Conversaciones." +
+                             "3 Menu exportacion." +
+                             "4 Salir." +
                              "Ingrese una opcion ";
                 speechEngine.say(str);            
             }catch(IOException e) {
@@ -127,10 +127,10 @@ public class VoiceConsoleView extends ApplicationView {
         do {
             speechEngine.stopTalking();
             String str = 
-                "Menu Conversaciones" +
-                "1. Listar conversaciones" +
-                "2. Eliminar conversacion" +
-                "3. Salir" +
+                "Menu Conversaciones." +
+                "1 Listar conversaciones." +
+                "2 Eliminar conversacion." +
+                "3 Salir." +
                 "Ingrese una opcion ";
             try {   
                 speechEngine.say(str);
@@ -185,10 +185,10 @@ public class VoiceConsoleView extends ApplicationView {
         do {
             speechEngine.stopTalking();
             String str = 
-                "MENU IMPORTACION" +
-                "1. Importar Conversaciones" +
-                "2. Exportar Conversacion" +
-                "3. Salir" +
+                "MENU IMPORTACION." +
+                "1 Importar Conversaciones." +
+                "2 Exportar Conversacion." +
+                "3 Salir." +
                 "Ingrese una opcion ";
             try {   
                 speechEngine.say(str);
@@ -280,7 +280,7 @@ public class VoiceConsoleView extends ApplicationView {
             do {
                 speechEngine.stopTalking();
                 try{
-                    speechEngine.say("1. Ver conversacion completa  2. Volver  Ingrese una opcion");
+                    speechEngine.say("1 Ver conversacion completa.  2 Volver.  Ingrese una opcion");
                 }catch(IOException e){}               
                 System.out.println("");
                 System.out.println("1. Ver conversacion completa");
