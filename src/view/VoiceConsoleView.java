@@ -254,7 +254,7 @@ public class VoiceConsoleView extends ApplicationView {
         System.out.println("Conversacion finalizada. Volviendo al Menu Principal");
         speechEngine.stopTalking();
         try{
-            speechEngine.say("Conversacion finalizada. Volviendo al Menu Principal");
+            speechEngine.say("Conversacion finalizada. Volviendo al Menu");
         }catch(IOException e){} 
         try{ 
             Thread.sleep(2000); 
