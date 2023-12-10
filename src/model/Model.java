@@ -65,12 +65,16 @@ public class Model {
     }
     
     public boolean importConversations() {
-        conversaciones = rep.importConversation();
-        if (conversaciones != null) {
+        ArrayList<Conversation> conversacionesImportadas = new ArrayList<>();
+        conversacionesImportadas = rep.importConversation();
+        
+        if (conversacionesImportadas != null) {
+            for(Conversation con : conversacionesImportadas) {
+                conversaciones.add(con);
+            }
             return true;
         }
         else{
-            conversaciones = new ArrayList<>();
             return false;
         }
     }

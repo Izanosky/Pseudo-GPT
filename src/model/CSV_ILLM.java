@@ -38,7 +38,7 @@ public class CSV_ILLM implements ILLM {
                 }
             }
         } catch (IOException e) {
-            System.err.println("ERROR" + e.getMessage());
+            System.err.println("ERROR " + e.getMessage());
         }
         
         for(Text t: respuestas){
