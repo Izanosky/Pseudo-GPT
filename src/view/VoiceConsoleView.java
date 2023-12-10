@@ -45,16 +45,7 @@ public class VoiceConsoleView extends ApplicationView {
      
     @Override
     public void showApplicationStart(String welcomeMsg) {
-        try{
-            speechEngine.say(welcomeMsg);
-        }catch(IOException e){
-            System.err.println("ERROR: " + e.getMessage());
-        }
-        
         System.out.printf(welcomeMsg + "\n");
-        try{ 
-            Thread.sleep(6000); 
-        } catch(Exception e ) {  }
     }
 
     @Override
@@ -62,11 +53,8 @@ public class VoiceConsoleView extends ApplicationView {
         int opcion;      
         do {
             try{
-                try{ 
-                    Thread.sleep(1000); 
-                } catch(Exception e ) {  }
                 String str = 
-                             "Menu principal" +
+                             "Menu principal." +
                              "1. Nueva Conversacion" +
                              "2. Menu Conversaciones" +
                              "3. Menu exportacion" +
@@ -85,12 +73,24 @@ public class VoiceConsoleView extends ApplicationView {
 
             switch (opcion) {
                 case 1:
+                    speechEngine.stopTalking();
+                    try{
+                        speechEngine.say("Opcion elegida. Nueva Conversacion");
+                    }catch(IOException e){}  
                     newConversation();
                     break;
                 case 2:
+                    speechEngine.stopTalking();
+                    try{
+                        speechEngine.say("Opcion elegida. Menu conversaciones");
+                    }catch(IOException e){}
                     conversationCRUD();
                     break;
                 case 3:
+                    speechEngine.stopTalking();
+                    try{
+                        speechEngine.say("Opcion elegida. Menu exportacion");
+                    }catch(IOException e){}
                     importCRUD();
                     break;
                 case 4:
@@ -99,6 +99,9 @@ public class VoiceConsoleView extends ApplicationView {
                         speechEngine.say("Saliendo");
                     }catch(IOException e){}                    
                     System.out.println("Saliendo...");
+                    try{ 
+                        Thread.sleep(1000); 
+                    } catch(Exception e ) {  }
                     break;
                 default:
                     speechEngine.stopTalking();
@@ -106,16 +109,15 @@ public class VoiceConsoleView extends ApplicationView {
                         speechEngine.say("Opcion no valida");
                     }catch(IOException e){} 
                     System.out.println("Opcion no valida.");
+                    try{ 
+                        Thread.sleep(1000); 
+                    } catch(Exception e ) {  }
             }
         } while (opcion != 4);
     }
 
     @Override
-    public void showApplicationEnd(String endMsg) {
-        speechEngine.stopTalking();
-        try{
-            speechEngine.say(endMsg);
-        }catch(IOException e){} 
+    public void showApplicationEnd(String endMsg) { 
         System.out.printf(endMsg + "\n");
     } 
     
@@ -141,9 +143,17 @@ public class VoiceConsoleView extends ApplicationView {
 
             switch (opcion) {
                 case 1:
+                    speechEngine.stopTalking();
+                    try{
+                        speechEngine.say("Opcion elegida. Listar conversaciones");
+                    }catch(IOException e){}
                     listarConversaciones();
                     break;
                 case 2:
+                    speechEngine.stopTalking();
+                    try{
+                        speechEngine.say("Opcion elegida. Eliminar conversacion");
+                    }catch(IOException e){}
                     eliminarConversaciones();
                     break;
                 case 3:
@@ -185,15 +195,23 @@ public class VoiceConsoleView extends ApplicationView {
             } catch (IOException ex) {}
             System.out.println("\n--- MENU IMPORTACION ---");
             System.out.println("1. Importar Conversaciones");
-            System.out.println("2. Exportar Conversacion");
+            System.out.println("2. Exportar Conversaciones");
             System.out.println("3. Salir");
             opcion = readInt("Ingrese una opcion: ");
 
             switch (opcion) {
                 case 1:
+                    speechEngine.stopTalking();
+                    try{
+                        speechEngine.say("Opcion elegida. Importar conversaciones");
+                    }catch(IOException e){}
                     importarConversaciones();
                     break;
                 case 2:
+                    speechEngine.stopTalking();
+                    try{
+                        speechEngine.say("Opcion elegida. Exportar conversaciones");
+                    }catch(IOException e){}
                     exportarConversaciones();
                     break;
                 case 3:
@@ -224,10 +242,6 @@ public class VoiceConsoleView extends ApplicationView {
         Instant start = Instant.now().truncatedTo(ChronoUnit.SECONDS);
         String temp;
         String response;
-        speechEngine.stopTalking();
-        try{
-            speechEngine.say("Nueva conversacion");
-        }catch(IOException e){} 
         System.out.println("-------------- NUEVA CONVERSACION --------------");
         while (true) {
             System.out.printf("Yo [" + start + "]");
@@ -252,13 +266,6 @@ public class VoiceConsoleView extends ApplicationView {
         Instant End = Instant.now().truncatedTo(ChronoUnit.SECONDS);
         c.setConversation(start.toString(), End.toString(), start.getEpochSecond(), End.getEpochSecond());
         System.out.println("Conversacion finalizada. Volviendo al Menu Principal");
-        speechEngine.stopTalking();
-        try{
-            speechEngine.say("Conversacion finalizada. Volviendo al Menu");
-        }catch(IOException e){} 
-        try{ 
-            Thread.sleep(2000); 
-        } catch(Exception e ) {  }
     }
     
     public void listarConversaciones () {
@@ -282,18 +289,14 @@ public class VoiceConsoleView extends ApplicationView {
 
                 switch (opcion) {
                     case 1:
+                        speechEngine.stopTalking();
+                        try{
+                            speechEngine.say("Opcion elegida. Ver conversacion completa");
+                        }catch(IOException e){}
                         int selected;                   
-                        do{
-                            speechEngine.stopTalking();
-                            try{
-                                speechEngine.say("Indique el indice de la conversacion que desea leer");
-                            }catch(IOException e){}   
+                        do{     
                             selected = readInt("Indique el indice de la conversacion que desea leer: ");
-                            if(selected < 0 || selected > c.getConversationSize()){
-                                speechEngine.stopTalking();
-                                try{
-                                    speechEngine.say("INDICE NO VALIDO");
-                                }catch(IOException e){}  
+                            if(selected < 0 || selected > c.getConversationSize()){ 
                                 System.out.println("----- INDICE NO VALIDO -----");
                                 try{ 
                                     Thread.sleep(1000); 
@@ -306,6 +309,9 @@ public class VoiceConsoleView extends ApplicationView {
                         for (Message m : conver.getMensajes()) {
                             System.out.println(String.format("%10s [%s]: %s", m.getSender(), m.getDate(), m.getContent()));
                         }
+                        try{ 
+                            Thread.sleep(2000); 
+                        } catch(Exception e ) {  }
                         break;
                     case 2:
                         speechEngine.stopTalking();
@@ -329,16 +335,9 @@ public class VoiceConsoleView extends ApplicationView {
                 }
             } while (opcion != 2);
         }
-        else {
-            speechEngine.stopTalking();
-            try{
-                speechEngine.say("NO HAY CONVERSACIONES DISPONIBLES");
-            }catch(IOException e){} 
+        else { 
             System.out.println("------- NO HAY CONVERSACIONES DISPONIBLES -------");
         } 
-        try{ 
-            Thread.sleep(2000); 
-        } catch(Exception e ) {  }
     }
     
     public void eliminarConversaciones () {
@@ -346,82 +345,41 @@ public class VoiceConsoleView extends ApplicationView {
         ArrayList<Conversation> conversaciones = c.getConversation();
         if(!conversaciones.isEmpty()){
             do{
-                speechEngine.stopTalking();
-                try{
-                    speechEngine.say("Indique el indice de la conversacion que desea eliminar");
-                }catch(IOException e){}
                 selected = readInt("Indique el indice de la conversacion que desea eliminar: ");
                 if(selected < 0 || selected > c.getConversationSize()){
-                    speechEngine.stopTalking();
-                    try{
-                        speechEngine.say("INDICE NO VALIDO");
-                    }catch(IOException e){}
                     System.out.println("----- INDICE NO VALIDO -----");
                 }
             }while(selected < 0 || selected > c.getConversationSize());
         
             c.eliminarConversacion(selected);        
             int indice = 1;
-            speechEngine.stopTalking();
-            try{
-                speechEngine.say("Conversaciones actualizadas");
-            }catch(IOException e){}
             System.out.println("\nConversaciones actualizadas");
             System.out.println(Conversation.getHeader());
             for (Conversation conver : conversaciones) {
                 System.out.printf("%10d" + conver.getTable() + "\n", indice++);
             }
         }
-        else {
-            speechEngine.stopTalking();
-            try{
-                speechEngine.say("NO HAY CONVERSACIONES DISPONIBLES");
-            }catch(IOException e){} 
+        else { 
             System.out.println("NO HAY CONVERSACIONES DISPONIBLES");
-        }
-        try{ 
-            Thread.sleep(2000); 
-        } catch(Exception e ) {  }      
+        }      
     }
     
     public void importarConversaciones () {
-        if(c.importConversations()){
-            speechEngine.stopTalking();
-            try {
-                speechEngine.say("Conversaciones importadas con exito");
-            }catch(IOException e){}           
+        if(c.importConversations()){           
             System.out.println("Conversaciones importadas con exito");
         }
         else{
-            try {
-                speechEngine.say("No se pudo importar las conversaciones");
-            }catch(IOException e){}
             System.out.println("No se pudo importar las conversaciones");
         }
-        try{ 
-            Thread.sleep(2000); 
-        } catch(Exception e ) {  }
     }
     
     public void exportarConversaciones () {
         if(c.exportConversations()){
-            speechEngine.stopTalking();
-            try {
-                speechEngine.say("Conversaciones exportadas con exito");
-            }catch(IOException e){}
             System.out.println("Conversaciones exportadas con exito");
         }
         else{
-            speechEngine.stopTalking();
-            try {
-                speechEngine.say("No se pudo exportar las conversaciones");
-            }catch(IOException e){}
             System.out.println("No se pudo exportar las conversaciones");
         }
-        
-        try{ 
-            Thread.sleep(2000); 
-        } catch(Exception e ) {  }
     }
     
 }

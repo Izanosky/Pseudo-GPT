@@ -19,14 +19,15 @@ import java.util.ArrayList;
  * @author Usuario
  */
 public class JSON_Repository implements IRepository {
-    Path ruta = Paths.get(System.getProperty("user.home"), "Desktop", "jLLM", "input.json");
+    Path rutaImp = Paths.get(System.getProperty("user.home"), "Desktop", "jLLM", "input.json");
+    Path rutaExp = Paths.get(System.getProperty("user.home"), "Desktop", "jLLM", "output.json");
     boolean status;
     
     @Override
     public ArrayList<Conversation> importConversation() {
         Gson gson = new Gson();
         try{
-            String json = new String(Files.readAllBytes(ruta), StandardCharsets.UTF_8);
+            String json = new String(Files.readAllBytes(rutaImp), StandardCharsets.UTF_8);
             Type tipoDeLista = new TypeToken<ArrayList<Conversation>>() {}.getType();
             return gson.fromJson(json, tipoDeLista);
         }catch(IOException e) {
@@ -39,7 +40,7 @@ public class JSON_Repository implements IRepository {
         try {
             Gson gson = new Gson();
             String json = gson.toJson(conversation);
-            Files.write(ruta, json.getBytes(StandardCharsets.UTF_8));
+            Files.write(rutaExp, json.getBytes(StandardCharsets.UTF_8));
             status = true;
         } catch (IOException e) {
             status = false;

@@ -18,14 +18,15 @@ import java.util.ArrayList;
  * @author Usuario
  */
 public class XML_Repository implements IRepository {
-    Path ruta = Paths.get(System.getProperty("user.home"), "Desktop", "jLLM", "input.xml");
+    Path rutaImp = Paths.get(System.getProperty("user.home"), "Desktop", "jLLM", "input.xml");
+    Path rutaExp = Paths.get(System.getProperty("user.home"), "Desktop", "jLLM", "output.xml");
     boolean status;
     
     @Override
     public ArrayList<Conversation> importConversation() {
         try {
             XmlMapper xmlMapper = new XmlMapper();
-            String xml = new String(Files.readAllBytes(ruta), StandardCharsets.UTF_8);
+            String xml = new String(Files.readAllBytes(rutaImp), StandardCharsets.UTF_8);
             return xmlMapper.readValue(xml, xmlMapper.getTypeFactory().constructCollectionType(ArrayList.class, Conversation.class));
         } catch (IOException e) {
             return null;
@@ -37,7 +38,7 @@ public class XML_Repository implements IRepository {
         try {
             XmlMapper xmlMapper = new XmlMapper();
             String xml = xmlMapper.writeValueAsString(conversation);
-            Files.write(ruta, xml.getBytes(StandardCharsets.UTF_8));
+            Files.write(rutaExp, xml.getBytes(StandardCharsets.UTF_8));
             status = true;
         } catch (JsonProcessingException e) {
             status = false;
