@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Usuario
+ * @author Izan Jiménez Chaves
  */
 public class XML_Repository implements IRepository {
     Path rutaImp = Paths.get(System.getProperty("user.home"), "Desktop", "jLLM", "input.xml");

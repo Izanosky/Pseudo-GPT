@@ -6,7 +6,7 @@ package model;
 
 /**
  *
- * @author Usuario
+ * @author Izan Jiménez Chaves
  */
 public class Text {
     String content;

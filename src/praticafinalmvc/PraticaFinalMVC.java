@@ -17,6 +17,7 @@ import model.CSV_ILLM;
 import model.Fake_ILLM;
 import model.XML_Repository;
 import model.JSON_Repository;
+import model.Smart_ILLM;
 
 /**
  *
@@ -68,6 +69,8 @@ public class PraticaFinalMVC {
                 return new CSV_ILLM();
             case "fake":
                 return new Fake_ILLM();
+            case "smart":
+                return new Smart_ILLM();
             default:
                 return new Fake_ILLM();
         }

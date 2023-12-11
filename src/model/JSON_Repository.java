@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Usuario
+ * @author Izan Jiménez Chaves
  */
 public class JSON_Repository implements IRepository {
     Path rutaImp = Paths.get(System.getProperty("user.home"), "Desktop", "jLLM", "input.json");

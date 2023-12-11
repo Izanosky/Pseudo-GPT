@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 /**
  *
- * @author Usuario
+ * @author Izan Jiménez Chaves
  */
 public class Fake_ILLM implements ILLM {
     ArrayList<String> respuestas = new ArrayList<String>( Arrays.asList(
