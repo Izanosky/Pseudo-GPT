@@ -12,6 +12,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -43,8 +44,8 @@ public class Model {
         mensajes.add(msg);
     }
     
-    public void setConversation(String start, String end, long strt, long End){ 
-        conversaciones.add(new Conversation(intel.getIdentifier(), mensajes, start, end, strt, End));
+    public void setConversation(long strt, long end){ 
+        conversaciones.add(new Conversation(intel.getIdentifier(), mensajes, strt, end));
     }
     
     public ArrayList<Conversation> getConversation() {
@@ -65,8 +66,7 @@ public class Model {
     }
     
     public boolean importConversations() {
-        ArrayList<Conversation> conversacionesImportadas = new ArrayList<>();
-        conversacionesImportadas = rep.importConversation();
+        List<Conversation> conversacionesImportadas = rep.importConversation();
         
         if (conversacionesImportadas != null) {
             for(Conversation con : conversacionesImportadas) {

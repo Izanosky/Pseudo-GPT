@@ -5,6 +5,9 @@
 package view;
 import static com.coti.tools.Esdia.*;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import model.Conversation;
@@ -14,6 +17,8 @@ import model.Message;
  * @author Izan Jimènez Chaves
  */
 public class SimpleConsoleView extends ApplicationView {
+    
+    DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/mm/yyyy : HH:mm:ss");
     
     @Override
     public void showApplicationStart(String welcomeMsg) {
@@ -124,18 +129,18 @@ public class SimpleConsoleView extends ApplicationView {
             }
             else {
                 Instant msg1 = Instant.now().truncatedTo(ChronoUnit.SECONDS);
-                c.addMessage(new Message("Usuario", temp, msg1.getEpochSecond(), msg1.toString()));
+                c.addMessage(new Message("Usuario", temp, msg1.getEpochSecond()));
             }
             
             response  = c.getResponse(temp);
             Instant msg2 = Instant.now().truncatedTo(ChronoUnit.SECONDS);
-            c.addMessage(new Message("Agent", response, msg2.getEpochSecond(), msg2.toString()));
+            c.addMessage(new Message("Agent", response, msg2.getEpochSecond()));
             System.out.printf("Agent [" + msg2 + "]: " + response + "\n");
             System.out.println("");
             
         }
-        Instant End = Instant.now().truncatedTo(ChronoUnit.SECONDS);
-        c.setConversation(start.toString(), End.toString(), start.getEpochSecond(), End.getEpochSecond());
+        Instant end = Instant.now().truncatedTo(ChronoUnit.SECONDS);
+        c.setConversation(start.getEpochSecond(), end.getEpochSecond());
         System.out.println("Conversacion finalizada. Volviendo al Menu Principal");
     }
     
@@ -165,9 +170,12 @@ public class SimpleConsoleView extends ApplicationView {
                         }while(selected < 0 || selected > c.getConversationSize());
                     
                         Conversation conver = conversaciones.get(selected-1);
-                        System.out.println("Conversacion del dia: " + conver.getFechaInicio());
+                        LocalDateTime inicioConver = LocalDateTime.ofEpochSecond(conver.getFechaInicio(), 0, ZoneOffset.ofHours(1));       
+                        
+                        System.out.println("Conversacion del dia: " + inicioConver.format(formato));
                         for (Message m : conver.getMensajes()) {
-                            System.out.println(String.format("%10s [%s]: %s", m.getSender(), m.getDate(), m.getContent()));
+                            LocalDateTime mensaje = LocalDateTime.ofEpochSecond(m.getEpochSeconds(), 0, ZoneOffset.ofHours(1));
+                            System.out.println(String.format("%10s [%s]: %s", m.getSender(), mensaje.format(formato), m.getContent()));
                         }
                         break;
                     case 2:
@@ -189,10 +197,10 @@ public class SimpleConsoleView extends ApplicationView {
         if(!conversaciones.isEmpty()){
             do{
                 selected = readInt("Indique el indice de la conversacion que desea eliminar: ");
-                if(selected < 0 || selected > c.getConversationSize()){
+                if(selected <= 0 || selected > c.getConversationSize()){
                     System.out.println("----- INDICE NO VALIDO -----");
                 }
-            }while(selected < 0 || selected > c.getConversationSize());
+            }while(selected <= 0 || selected > c.getConversationSize());
         
             c.eliminarConversacion(selected-1);
             conversaciones = c.getConversation();
@@ -209,7 +217,7 @@ public class SimpleConsoleView extends ApplicationView {
             }
         }
         else {
-            System.out.println("NO HAY CONVERSACIONES DISPONIBLES POR LO QUE NO SE PUEDE ELIMINAR NINGUNA");
+            System.out.println("NO HAY CONVERSACIONES DISPONIBLES");
         }
         
         
@@ -217,19 +225,19 @@ public class SimpleConsoleView extends ApplicationView {
     
     public void importarConversaciones () {
         if(c.importConversations()){
-            System.out.println("Conversaciones importadas con exito");
+            System.out.println("\n----- CONVERSACIONES IMPORTADAS CON EXITO");
         }
         else{
-            System.out.println("No se pudo importar las conversaciones");
+            System.out.println("\n----- NO SE PUDO IMPORTAR LAS CONVERSACIONES");
         }
     }
     
     public void exportarConversaciones () {
         if(c.exportConversations()){
-            System.out.println("Conversaciones exportadas con exito");
+            System.out.println("\n----- CONVERSACIONES EXPORTADAS CON EXITO");
         }
         else{
-            System.out.println("No se pudo exportar las conversaciones");
+            System.out.println("\n----- NO SE PUDO EXPORTAR LAS CONVERSACIONES");
         }
     }
     

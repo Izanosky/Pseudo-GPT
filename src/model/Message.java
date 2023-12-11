@@ -14,13 +14,14 @@ public class Message implements Serializable {
     String sender;
     long epochSeconds;
     String content;
-    String date;
-
-    public Message(String sender, String content, long seconds, String fecha) {
+    
+    public Message() {
+        
+    }
+    public Message(String sender, String content, long seconds) {
         this.sender = sender;
         this.content = content;
         this.epochSeconds = seconds;
-        this.date = fecha;
     }
 
     public String getSender() {
@@ -45,14 +46,6 @@ public class Message implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
     
 }

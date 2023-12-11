@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -24,11 +24,11 @@ public class JSON_Repository implements IRepository {
     boolean status;
     
     @Override
-    public ArrayList<Conversation> importConversation() {
+    public List<Conversation> importConversation() {
         Gson gson = new Gson();
         try{
             String json = new String(Files.readAllBytes(rutaImp), StandardCharsets.UTF_8);
-            Type tipoDeLista = new TypeToken<ArrayList<Conversation>>() {}.getType();
+            Type tipoDeLista = new TypeToken<List<Conversation>>() {}.getType();
             return gson.fromJson(json, tipoDeLista);
         }catch(IOException e) {
             return null;
@@ -36,7 +36,7 @@ public class JSON_Repository implements IRepository {
     }
 
     @Override
-    public void exportConversation(ArrayList<Conversation> conversation) {
+    public void exportConversation(List<Conversation> conversation) {
         try {
             Gson gson = new Gson();
             String json = gson.toJson(conversation);

@@ -62,8 +62,8 @@ public class Controller {
         m.addMessage(msg);
     }
     
-    public void setConversation(String start, String end, long strt, long End) {
-        m.setConversation(start, end, strt, End);       
+    public void setConversation(long strt, long end) {
+        m.setConversation(strt, end);       
     }
     
     public boolean importConversations() {

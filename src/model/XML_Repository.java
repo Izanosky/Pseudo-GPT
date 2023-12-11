@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -23,18 +23,19 @@ public class XML_Repository implements IRepository {
     boolean status;
     
     @Override
-    public ArrayList<Conversation> importConversation() {
+    public List<Conversation> importConversation() {
         try {
             XmlMapper xmlMapper = new XmlMapper();
             String xml = new String(Files.readAllBytes(rutaImp), StandardCharsets.UTF_8);
-            return xmlMapper.readValue(xml, xmlMapper.getTypeFactory().constructCollectionType(ArrayList.class, Conversation.class));
-        } catch (IOException e) {
+            return xmlMapper.readValue(xml, xmlMapper.getTypeFactory().constructCollectionType(List.class, Conversation.class));
+        } catch (IOException ex) {
+            System.err.println("Error:" + ex.getMessage());
             return null;
         }
     }
 
     @Override
-    public void exportConversation(ArrayList<Conversation> conversation) {
+    public void exportConversation(List<Conversation> conversation) {
         try {
             XmlMapper xmlMapper = new XmlMapper();
             String xml = xmlMapper.writeValueAsString(conversation);

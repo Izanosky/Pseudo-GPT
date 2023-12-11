@@ -12,6 +12,9 @@ import io.github.jonelo.jAdapterForNativeTTS.engines.Voice;
 import io.github.jonelo.jAdapterForNativeTTS.engines.exceptions.SpeechEngineCreationException;
 import java.io.IOException;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +29,7 @@ public class VoiceConsoleView extends ApplicationView {
     SpeechEngine speechEngine;
     List<Voice> voices;
     Voice voice;
+    DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/mm/yyyy : HH:mm:ss");
             
     public VoiceConsoleView () {
         try {
@@ -253,18 +257,18 @@ public class VoiceConsoleView extends ApplicationView {
             }
             else {
                 Instant msg1 = Instant.now().truncatedTo(ChronoUnit.SECONDS);
-                c.addMessage(new Message("Usuario", temp, msg1.getEpochSecond(), msg1.toString()));
+                c.addMessage(new Message("Usuario", temp, msg1.getEpochSecond()));
             }
             
             response  = c.getResponse(temp);
             Instant msg2 = Instant.now().truncatedTo(ChronoUnit.SECONDS);
-            c.addMessage(new Message("Agent", response, msg2.getEpochSecond(), msg2.toString()));
+            c.addMessage(new Message("Agent", response, msg2.getEpochSecond()));
             System.out.printf("Agent [" + msg2 + "]: " + response + "\n");
             System.out.println("");
             
         }
-        Instant End = Instant.now().truncatedTo(ChronoUnit.SECONDS);
-        c.setConversation(start.toString(), End.toString(), start.getEpochSecond(), End.getEpochSecond());
+        Instant end = Instant.now().truncatedTo(ChronoUnit.SECONDS);
+        c.setConversation(start.getEpochSecond(), end.getEpochSecond());
         System.out.println("Conversacion finalizada. Volviendo al Menu Principal");
     }
     
@@ -305,9 +309,12 @@ public class VoiceConsoleView extends ApplicationView {
                         }while(selected < 0 || selected > c.getConversationSize());
                     
                         Conversation conver = conversaciones.get(selected-1);
-                        System.out.println("Conversacion del dia: " + conver.getFechaInicio());
+                        LocalDateTime inicioConver = LocalDateTime.ofEpochSecond(conver.getFechaInicio(), 0, ZoneOffset.ofHours(1)); 
+                        
+                        System.out.println("Conversacion del dia: " + inicioConver.format(formato));
                         for (Message m : conver.getMensajes()) {
-                            System.out.println(String.format("%10s [%s]: %s", m.getSender(), m.getDate(), m.getContent()));
+                            LocalDateTime mensaje = LocalDateTime.ofEpochSecond(m.getEpochSeconds(), 0, ZoneOffset.ofHours(1));
+                            System.out.println(String.format("%10s [%s]: %s", m.getSender(), mensaje.format(formato), m.getContent()));
                         }
                         try{ 
                             Thread.sleep(2000); 
@@ -346,10 +353,10 @@ public class VoiceConsoleView extends ApplicationView {
         if(!conversaciones.isEmpty()){
             do{
                 selected = readInt("Indique el indice de la conversacion que desea eliminar: ");
-                if(selected < 0 || selected > c.getConversationSize()){
+                if(selected <= 0 || selected > c.getConversationSize()){
                     System.out.println("----- INDICE NO VALIDO -----");
                 }
-            }while(selected < 0 || selected > c.getConversationSize());
+            }while(selected <= 0 || selected > c.getConversationSize());
         
             c.eliminarConversacion(selected);        
             int indice = 1;
@@ -366,19 +373,19 @@ public class VoiceConsoleView extends ApplicationView {
     
     public void importarConversaciones () {
         if(c.importConversations()){           
-            System.out.println("Conversaciones importadas con exito");
+            System.out.println("\n----- CONVERSACIONES IMPORTADAS CON EXITO");
         }
         else{
-            System.out.println("No se pudo importar las conversaciones");
+            System.out.println("\n----- NO SE PUDO IMPORTAR LAS CONVERSACIONES");
         }
     }
     
     public void exportarConversaciones () {
         if(c.exportConversations()){
-            System.out.println("Conversaciones exportadas con exito");
+            System.out.println("\n----- CONVERSACIONES EXPORTADAS CON EXITO");
         }
         else{
-            System.out.println("No se pudo exportar las conversaciones");
+            System.out.println("\n----- NO SE PUDO EXPORTAR LAS CONVERSACIONES");
         }
     }
     

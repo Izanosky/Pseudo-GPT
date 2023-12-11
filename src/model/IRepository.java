@@ -5,13 +5,14 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Izan Jimènez Chaves
  */
 public interface IRepository {
-    public ArrayList<Conversation> importConversation();
-    public void exportConversation (ArrayList<Conversation> conversation);
+    public List<Conversation> importConversation();
+    public void exportConversation (List<Conversation> conversation);
     public boolean getStatus();
 }
