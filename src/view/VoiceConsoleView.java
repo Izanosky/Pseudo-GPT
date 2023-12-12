@@ -29,7 +29,7 @@ public class VoiceConsoleView extends ApplicationView {
     SpeechEngine speechEngine;
     List<Voice> voices;
     Voice voice;
-    DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/mm/yyyy | HH:mm:ss");
+    DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy | HH:mm:ss");
             
     public VoiceConsoleView () {
         try {

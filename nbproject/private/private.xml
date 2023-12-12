@@ -2,23 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Usuario/Documents/GitHub/Pseudo-GPT/src/model/Model.java</file>
-            <file>file:/C:/Users/Usuario/Documents/GitHub/Pseudo-GPT/src/model/IRepository.java</file>
-            <file>file:/C:/Users/Usuario/Documents/GitHub/Pseudo-GPT/src/model/CSV_ILLM.java</file>
-            <file>file:/C:/Users/Usuario/Documents/GitHub/Pseudo-GPT/src/model/Text.java</file>
-            <file>file:/C:/Users/Usuario/Documents/GitHub/Pseudo-GPT/src/view/ApplicationView.java</file>
-            <file>file:/C:/Users/Usuario/Documents/GitHub/Pseudo-GPT/src/view/SimpleConsoleView.java</file>
-            <file>file:/C:/Users/Usuario/Documents/GitHub/Pseudo-GPT/src/controller/Controller.java</file>
-            <file>file:/C:/Users/Usuario/Documents/GitHub/Pseudo-GPT/src/model/Conversation.java</file>
-            <file>file:/C:/Users/Usuario/Documents/GitHub/Pseudo-GPT/src/model/XML_Repository.java</file>
-            <file>file:/C:/Users/Usuario/Documents/GitHub/Pseudo-GPT/src/model/Smart_ILLM.java</file>
-            <file>file:/C:/Users/Usuario/Documents/GitHub/Pseudo-GPT/src/model/JSON_Repository.java</file>
-            <file>file:/C:/Users/Usuario/Documents/GitHub/Pseudo-GPT/src/model/Fake_ILLM.java</file>
-            <file>file:/C:/Users/Usuario/Documents/GitHub/Pseudo-GPT/src/praticafinalmvc/PraticaFinalMVC.java</file>
-            <file>file:/C:/Users/Usuario/Documents/GitHub/Pseudo-GPT/src/model/ILLM.java</file>
-            <file>file:/C:/Users/Usuario/Documents/GitHub/Pseudo-GPT/src/view/VoiceConsoleView.java</file>
-            <file>file:/C:/Users/Usuario/Documents/GitHub/Pseudo-GPT/src/model/Message.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

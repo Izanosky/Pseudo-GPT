@@ -18,7 +18,7 @@ import model.Message;
  */
 public class SimpleConsoleView extends ApplicationView {
     
-    DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/mm/yyyy | HH:mm:ss");
+    DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy | HH:mm:ss");
     
     @Override
     public void showApplicationStart(String welcomeMsg) {

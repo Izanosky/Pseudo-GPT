@@ -89,7 +89,7 @@ public class Conversation implements Serializable {
     public String getTable() {
         Message temp = this.mensajes.get(0);
         LocalDateTime horaMensaje = LocalDateTime.ofEpochSecond(this.fechaInicio, 0, ZoneOffset.ofHours(1));
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/mm/yyyy | HH:mm:ss");
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy | HH:mm:ss");
         
         if(temp.getContent().length() > 20 ){              
             return String.format("|%30s|%20s|%20s ... |", horaMensaje.format(formato), this.mensajes.size(), temp.getContent().substring(0, 20));
