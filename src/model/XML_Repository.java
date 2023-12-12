@@ -29,7 +29,6 @@ public class XML_Repository implements IRepository {
             String xml = new String(Files.readAllBytes(rutaImp), StandardCharsets.UTF_8);
             return xmlMapper.readValue(xml, xmlMapper.getTypeFactory().constructCollectionType(List.class, Conversation.class));
         } catch (IOException ex) {
-            System.err.println("Error:" + ex.getMessage());
             return null;
         }
     }

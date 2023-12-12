@@ -29,7 +29,7 @@ public class VoiceConsoleView extends ApplicationView {
     SpeechEngine speechEngine;
     List<Voice> voices;
     Voice voice;
-    DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/mm/yyyy : HH:mm:ss");
+    DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/mm/yyyy | HH:mm:ss");
             
     public VoiceConsoleView () {
         try {
@@ -300,13 +300,13 @@ public class VoiceConsoleView extends ApplicationView {
                         int selected;                   
                         do{     
                             selected = readInt("Indique el indice de la conversacion que desea leer: ");
-                            if(selected < 0 || selected > c.getConversationSize()){ 
+                            if(selected <= 0 || selected > c.getConversationSize()){ 
                                 System.out.println("----- INDICE NO VALIDO -----");
                                 try{ 
                                     Thread.sleep(1000); 
                                 } catch(Exception e ) {  }
                             }
-                        }while(selected < 0 || selected > c.getConversationSize());
+                        }while(selected <= 0 || selected > c.getConversationSize());
                     
                         Conversation conver = conversaciones.get(selected-1);
                         LocalDateTime inicioConver = LocalDateTime.ofEpochSecond(conver.getFechaInicio(), 0, ZoneOffset.ofHours(1)); 
@@ -358,12 +358,18 @@ public class VoiceConsoleView extends ApplicationView {
                 }
             }while(selected <= 0 || selected > c.getConversationSize());
         
-            c.eliminarConversacion(selected);        
+            c.eliminarConversacion(selected-1);        
+            conversaciones = c.getConversation();
             int indice = 1;
-            System.out.println("\nConversaciones actualizadas");
-            System.out.println(Conversation.getHeader());
-            for (Conversation conver : conversaciones) {
-                System.out.printf("%10d" + conver.getTable() + "\n", indice++);
+            System.out.println("\nConversaciones actualizadas: ");
+            if (!conversaciones.isEmpty()) {
+                System.out.println(Conversation.getHeader());
+                for (Conversation conver : conversaciones) {
+                    System.out.printf("%10d" + conver.getTable() + "\n", indice++);
+                }
+            }            
+            else{
+                System.out.println("------- NO HAY CONVERSACIONES DISPONIBLES -------");
             }
         }
         else { 

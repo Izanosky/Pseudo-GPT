@@ -18,7 +18,7 @@ import model.Message;
  */
 public class SimpleConsoleView extends ApplicationView {
     
-    DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/mm/yyyy : HH:mm:ss");
+    DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/mm/yyyy | HH:mm:ss");
     
     @Override
     public void showApplicationStart(String welcomeMsg) {
@@ -164,10 +164,10 @@ public class SimpleConsoleView extends ApplicationView {
                         int selected;                   
                         do{
                             selected = readInt("Indique el indice de la conversacion que desea leer: ");
-                            if(selected < 0 || selected > c.getConversationSize()){
+                            if(selected <= 0 || selected > c.getConversationSize()){
                                 System.out.println("----- INDICE NO VALIDO -----");
                             }
-                        }while(selected < 0 || selected > c.getConversationSize());
+                        }while(selected <= 0 || selected > c.getConversationSize());
                     
                         Conversation conver = conversaciones.get(selected-1);
                         LocalDateTime inicioConver = LocalDateTime.ofEpochSecond(conver.getFechaInicio(), 0, ZoneOffset.ofHours(1));       
