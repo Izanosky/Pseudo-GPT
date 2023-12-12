@@ -14,8 +14,8 @@ import model.Model;
  * @author Izan Jimènez Chaves
  */
 public class Controller {
-    Model m;
-    ApplicationView v;
+    private Model m;
+    private ApplicationView v;
     
     public Controller(Model mod, ApplicationView vi){
         this.m = mod;

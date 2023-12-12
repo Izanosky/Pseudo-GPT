@@ -19,8 +19,8 @@ import java.util.List;
  * @author Izan Jiménez Chaves
  */
 public class Model {
-    IRepository rep;
-    ILLM intel;
+    private IRepository rep;
+    private ILLM intel;
     File ficheroSerializado;
     ArrayList<Conversation> conversaciones;
     ArrayList<Message> mensajes;

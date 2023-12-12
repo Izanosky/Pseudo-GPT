@@ -16,10 +16,10 @@ import java.util.ArrayList;
  * @author Izan Jimènez Chaves
  */
 public class Conversation implements Serializable {
-    String llmName;
-    ArrayList<Message> mensajes;
-    long fechaInicio;
-    long fechaFin;
+    private String llmName;
+    private ArrayList<Message> mensajes;
+    private long fechaInicio;
+    private long fechaFin;
     
     public Conversation() {
         

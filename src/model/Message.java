@@ -11,9 +11,9 @@ import java.io.Serializable;
  * @author Izan Jimènez Chaves
  */
 public class Message implements Serializable {
-    String sender;
-    long epochSeconds;
-    String content;
+    private String sender;
+    private long epochSeconds;
+    private String content;
     
     public Message() {
         
